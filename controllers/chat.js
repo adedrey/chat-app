@@ -78,7 +78,7 @@ exports.getGeneralChat = async(req, res, next) => {
 exports.deleteGeneralChat = async(req, res, next) => {
     try {
         // Get message ID
-        const { messageId } = req.params.messageId;
+        const { messageId } = req.params;
         const delete_message = await Message.findOneAndDelete({
             _id: messageId
         })

@@ -36,7 +36,7 @@ require('./config/passport')(passport)
 app.use(passport.initialize());
 
 // Express body-parser
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({extended: true}))
 
 // Set up cors - GET, POST, PUT, PATCH, and other REQUEST

@@ -15,7 +15,6 @@ exports.postGeneralChat = async(req, res, next) => {
         let { message } = req.body;
         // Check if message is an Image
         let base64regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
-        console.log(base64regex.test(message))
         if (base64regex.test(message)) {
             // Store image in cloudinary
             console.log("cloudinary")

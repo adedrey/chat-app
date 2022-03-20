@@ -1,7 +1,8 @@
 // Import Models
 const Message = require('../models/message')
-const Chat = require('../models/chat')
-
+const Chat = require('../models/chat');
+// Import Library
+const isBase64 = require('is-base64');
 // Import Socket
 const io = require('../socket');
 
@@ -14,8 +15,9 @@ exports.postGeneralChat = async(req, res, next) => {
     try {
         let { message } = req.body;
         // Check if message is an Image
-        let base64regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
-        if (base64regex.test(message)) {
+        const base64Checker = isBase64(message, {allowMime: true})
+        console.log(base64Checker)
+        if (base64Checker) {
             // Store image in cloudinary
             console.log("cloudinary")
             const uploadResponse = await cloudinary.uploader.upload(message, {

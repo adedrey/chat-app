@@ -19,7 +19,7 @@ exports.postGeneralChat = async(req, res, next) => {
             // Store image in cloudinary
             console.log("cloudinary")
             const uploadResponse = await cloudinary.uploader.upload(message, {
-                upload_preset: 'chat_task_img'
+                upload_preset: 'chat_img'
             });
             // convert image into an Object. Remember message ca take any type
             message = {url: uploadResponse.url, id: uploadResponse.public_id}

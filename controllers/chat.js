@@ -59,7 +59,7 @@ exports.postGeneralChat = async(req, res, next) => {
 exports.getGeneralChat = async(req, res, next) => {
     try {
         // Get all messages
-        const messages = await Customer.find();
+        const messages = await Message.find();
         // Send response to the clients
         res.status(200).json({
             messages: messages

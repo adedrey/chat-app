@@ -27,19 +27,21 @@ exports.postGeneralChat = async(req, res, next) => {
             message = {url: uploadResponse.url, id: uploadResponse.public_id}
         }
         // Save message
-        const save_message = await Message({
+
+        const new_message = await Message({
             message: message,
             user: req.user
         })
+        const saveMessageToDB = await new_message.save()
         // Update Client of a POST Action with saved Message using SOCKET.IO
         // The Client can then push to the object into the list of messages
         io.getIO().emit('general_message', {
             action: 'post_message',
-            message: save_message
+            message: saveMessageToDB
         })
 
         res.status(200).json({
-            message: save_message
+            message: saveMessageToDB
         });
         
     } catch (err) {
